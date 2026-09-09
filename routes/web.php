@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+// <<<<<<< feature/auth-project-task
+// use App\Http\Controllers\AdminUserController;
+// =======
+// >>>>>>> dev
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +31,10 @@ Route::middleware('auth')->group(function (): void {
     Route::put('/projects/{project}/tasks/{task}', [TaskController::class, 'update'])->name('projects.tasks.update');
     Route::delete('/projects/{project}/tasks/{task}', [TaskController::class, 'destroy'])->name('projects.tasks.destroy');
 });
+// <<<<<<< feature/auth-project-task
+
+// Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function (): void {
+//     Route::resource('users', AdminUserController::class)->only(['index', 'create', 'store', 'destroy']);
+// });
+// =======
+// >>>>>>> dev
