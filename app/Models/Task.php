@@ -30,4 +30,46 @@ class Task extends Model
         return $this->belongsToMany(User::class, 'task_assignees')
             ->withPivot('assigned_at');
     }
+
+        /**
+     * Scope: filter berdasarkan status.
+     */
+    public function scopeStatus($query, string $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * Scope: filter berdasarkan priority.
+     */
+    public function scopePriority($query, string $priority)
+    {
+        return $query->where('priority', $priority);
+    }
+
+    /**
+     * Scope: urutkan berdasarkan deadline terdekat.
+     */
+    public function scopeOrderByDeadline($query, string $direction = 'asc')
+    {
+        return $query->orderBy('deadline', $direction);
+    }
+
+    /**
+     * Hitung progress suatu project berdasarkan task yang statusnya COMPLETED.
+     */
+    public static function calculateProgress(int $projectId): float
+    {
+        $total = static::where('project_id', $projectId)->count();
+
+        if ($total === 0) {
+            return 0;
+        }
+
+        $completed = static::where('project_id', $projectId)
+            ->where('status', 'COMPLETED')
+            ->count();
+
+        return round(($completed / $total) * 100, 2);
+    }
 }
