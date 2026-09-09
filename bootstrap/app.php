@@ -12,9 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-            'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
-        ]);
+// <<<<<<< feature/auth-project-task
+//         $middleware->alias([
+//             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+//         ]);
+// =======
+//         //
+// >>>>>>> dev
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
